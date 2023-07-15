@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "release": "cd packages/core && npm run renew-it"
+    "release": "cd packages/core && npx renew-it"
   },
   "dependencies": {
     "renew-it": "^1.5.2"
