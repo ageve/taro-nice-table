@@ -1,1 +1,8 @@
-{"dependencies":{"renew-it":"^1.5.2"}}
+{
+  "scripts": {
+    "release": "cd packages/core && npm run renew-it"
+  },
+  "dependencies": {
+    "renew-it": "^1.5.2"
+  }
+}
