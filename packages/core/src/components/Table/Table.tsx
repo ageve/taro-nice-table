@@ -16,6 +16,7 @@ import {
   Props,
   SortOrder,
 } from "./types";
+import { Row } from "./Row";
 
 // constants
 const DEFAULT_COL_WIDTH = 100; // 默认列宽
@@ -202,125 +203,66 @@ const Table = (props: Props): JSX.Element | null => {
     [columns, loading, multipleSort]
   );
 
-  const Title = (titleProps: {
-    key: any;
-    column: IColumns;
-    index: number;
-  }): JSX.Element => {
-    const { column, index } = titleProps;
+  const Title = useCallback(
+    (titleProps: {
+      key: any;
+      column: IColumns;
+      index: number;
+    }): JSX.Element => {
+      const { column, index } = titleProps;
 
-    return (
-      <View
-        onClick={handleClickTitle.bind(this, column, index)}
-        className={cn({
-          taro3table_title: true,
-          taro3table_fixed: column.fixed,
-          [column.titleClassName || ""]: true,
-          [titleClassName]: true,
-        })}
-        style={{
-          [column.fixed as string]:
-            column.fixed &&
-            calculateFixedDistance({ fixedType: column.fixed, index, columns }),
-          width: getSize(column.width || DEFAULT_COL_WIDTH),
-          ...column.titleStyle,
-          ...titleStyle,
-          justifyContent: column.align && JC_TA_MAP[column.align],
-        }}
-        key={column.key || column.dataIndex}
-      >
-        {typeof column.title === "string" ? (
-          <Text>{column.title}</Text>
-        ) : (
-          column.title
-        )}
-        {column.sort && (
-          <View className="taro3table_sortBtn">
-            <View
-              className={cn({
-                taro3table_btn: true,
-                taro3table_ascend: true,
-                taro3table_active: column.sortOrder === "ascend",
-              })}
-            />
-            <View
-              className={cn({
-                taro3table_btn: true,
-                taro3table_descend: true,
-                taro3table_active: column.sortOrder === "descend",
-              })}
-            />
-          </View>
-        )}
-      </View>
-    );
-  };
-
-  const Row = (rowProps: {
-    key: any;
-    dataSourceItem: AnyOpt;
-    index: number;
-  }): JSX.Element => {
-    const { dataSourceItem, index } = rowProps;
-
-    return (
-      <View
-        key={dataSourceItem[rowKey]}
-        className={cn({
-          taro3table_row: true,
-          [rowClassName]: true,
-        })}
-        style={rowStyle}
-      >
-        {columns.map((columnItem: IColumns, colIndex: number): JSX.Element => {
-          const text = dataSourceItem[columnItem.dataIndex];
-          const expandable = columnItem.expandable !== false;
-          let result;
-
-          if (columnItem.render) {
-            const render = columnItem.render(text, dataSourceItem, index);
-
-            if (typeof render !== "object") {
-              result = <Text>{render}</Text>;
-            } else {
-              result = render;
-            }
-          } else {
-            result = <Text>{String(text)}</Text>;
-          }
-
-          return (
-            <View
-              onClick={expandable && setExpansion.bind(this, !expansion)}
-              key={columnItem.key || columnItem.dataIndex}
-              className={cn({
-                [colClassName]: true,
-                taro3table_col: true,
-                taro3table_fixed: columnItem.fixed,
-                taro3table_expansion: expansion,
-                [columnItem.className as string]: true,
-              })}
-              style={{
-                textAlign: columnItem.align || "center",
-                width: getSize(columnItem.width || DEFAULT_COL_WIDTH),
-                [columnItem.fixed as string]:
-                  columnItem.fixed &&
-                  calculateFixedDistance({
-                    fixedType: columnItem.fixed,
-                    index: colIndex,
-                    columns,
-                  }),
-                ...columnItem.style,
-                ...colStyle,
-              }}
-            >
-              {result}
+      return (
+        <View
+          onClick={handleClickTitle.bind(this, column, index)}
+          className={cn({
+            taro3table_title: true,
+            taro3table_fixed: column.fixed,
+            [column.titleClassName || ""]: true,
+            [titleClassName]: true,
+          })}
+          style={{
+            [column.fixed as string]:
+              column.fixed &&
+              calculateFixedDistance({
+                fixedType: column.fixed,
+                index,
+                columns,
+              }),
+            width: getSize(column.width || DEFAULT_COL_WIDTH),
+            ...column.titleStyle,
+            ...titleStyle,
+            justifyContent: column.align && JC_TA_MAP[column.align],
+          }}
+          key={column.key || column.dataIndex}
+        >
+          {typeof column.title === "string" ? (
+            <Text>{column.title}</Text>
+          ) : (
+            column.title
+          )}
+          {column.sort && (
+            <View className="taro3table_sortBtn">
+              <View
+                className={cn({
+                  taro3table_btn: true,
+                  taro3table_ascend: true,
+                  taro3table_active: column.sortOrder === "ascend",
+                })}
+              />
+              <View
+                className={cn({
+                  taro3table_btn: true,
+                  taro3table_descend: true,
+                  taro3table_active: column.sortOrder === "descend",
+                })}
+              />
             </View>
-          );
-        })}
-      </View>
-    );
-  };
+          )}
+        </View>
+      );
+    },
+    [columns, handleClickTitle, titleClassName, titleStyle]
+  );
 
   const wrapWidth = useMemo((): number => {
     return columns.reduce(function (prev, cur) {
@@ -375,6 +317,17 @@ const Table = (props: Props): JSX.Element | null => {
                     key={dataSourceItem[rowKey]}
                     dataSourceItem={dataSourceItem}
                     index={index}
+                    rowKey={rowKey}
+                    rowClassName={rowClassName}
+                    rowStyle={rowStyle}
+                    columns={columns}
+                    expansion={expansion}
+                    setExpansion={setExpansion}
+                    colClassName={colClassName}
+                    getSize={getSize}
+                    DEFAULT_COL_WIDTH={DEFAULT_COL_WIDTH}
+                    calculateFixedDistance={calculateFixedDistance}
+                    colStyle={colStyle}
                   />
                 );
               }
