@@ -24,7 +24,7 @@ export const Row = memo(
       dataSourceItem,
       index,
       rowKey,
-      rowClassName,
+      rowClassName = "",
       rowStyle,
       columns,
       expansion,
@@ -35,11 +35,6 @@ export const Row = memo(
       calculateFixedDistance,
       colStyle,
     } = props;
-
-    console.log(
-      "%c debug[row]",
-      "background: #69c0ff; color: white; padding: 4px"
-    );
 
     return (
       <View
@@ -69,14 +64,14 @@ export const Row = memo(
 
           return (
             <View
-              onClick={expandable && setExpansion.bind(this, !expansion)}
+              // onClick={expandable && setExpansion.bind(this, !expansion)}
               key={columnItem.key || columnItem.dataIndex}
               className={cn({
                 [colClassName]: true,
                 taro3table_col: true,
                 taro3table_fixed: columnItem.fixed,
                 taro3table_expansion: expansion,
-                [columnItem.className as string]: true,
+                [columnItem.className as string]: Boolean(columnItem.className),
               })}
               style={{
                 textAlign: columnItem.align || "center",
