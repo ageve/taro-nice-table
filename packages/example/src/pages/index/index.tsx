@@ -154,36 +154,57 @@ export default () => {
 
   const fetchData = async (): Promise<any[]> => {
     setLoading(true);
-    const { data } = await queryData();
+    const { data } = await queryData({ page: 1, page_size: 20 });
     setDataSource(data);
     setLoading(false);
     return data;
   };
 
+  const [tableHeight, setTableHeight] = useState<undefined>();
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      Taro.createSelectorQuery()
+        .select("#table-box")
+        .boundingClientRect()
+        .exec((res) => {
+          console.log(
+            "%c debug",
+            "background: #69c0ff; color: white; padding: 4px",
+            res
+          );
+          setTableHeight(res[0].height);
+        });
+    });
+  }, []);
+
   return (
-    <View className="example">
-      <MatchMedia minWidth={735}>
-        <view>当页面宽度在 736 以上展示这里</view>
-        <Table
-          // onChange={(v) => {
-          //   console.log("onChange -", v);
-          // }}
-          colStyle={{ padding: "0 5px" }}
-          columns={columns}
-          dataSource={dataSource}
-          rowKey="user_id"
-          loading={loading}
-          style={{
-            margin: "0 auto",
-            width: "100vw",
-          }}
-          // 固定表头、横向滚动 示例
-          scroll={{
-            x: "100vw",
-            y: 400,
-          }}
-        />
-      </MatchMedia>
+    <View
+      className="example"
+      style={{ height: "100vh", display: "flex", flexDirection: "column" }}
+    >
+      <View style={{ height: "200px", flexShrink: 0 }}></View>
+      <View style={{ flexGrow: 1, height: 10 }} id="table-box">
+        {tableHeight && (
+          <Table
+            colStyle={{ padding: "0 5px" }}
+            columns={columns}
+            dataSource={dataSource}
+            rowKey="user_id"
+            loading={loading}
+            isLastRowSticky
+            style={{
+              margin: "0 auto",
+              width: "100vw",
+            }}
+            // 固定表头、横向滚动 示例
+            scroll={{
+              x: "100vw",
+              y: tableHeight,
+            }}
+          />
+        )}
+      </View>
     </View>
   );
 };

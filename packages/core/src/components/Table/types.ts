@@ -57,4 +57,5 @@ export interface Props extends PropsWithChildren<any> {
     x?: number | string | boolean;
     y?: number | string | boolean;
   };
+  isLastRowSticky?: boolean; // 是否最后一行粘性固定在底部，用于编辑新增
 }

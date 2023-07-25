@@ -39,6 +39,7 @@ const Table = (props: Props): JSX.Element | null => {
     onChange = (): void => {},
     multipleSort = false,
     scroll = {},
+    isLastRowSticky = false,
   } = props;
 
   const [dataSource, setDataSource] = useState<AnyOpt[]>(pDataSource);
@@ -145,7 +146,11 @@ const Table = (props: Props): JSX.Element | null => {
                     dataSourceItem={dataSourceItem}
                     index={index}
                     rowKey={rowKey}
-                    rowClassName={rowClassName}
+                    rowClassName={`${rowClassName} ${
+                      isLastRowSticky && index === dataSource.length - 1
+                        ? "taro3table_row_last_sticky"
+                        : ""
+                    }`}
                     rowStyle={rowStyle}
                     columns={columns}
                     expansion={expansion}
