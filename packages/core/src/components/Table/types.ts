@@ -1,3 +1,4 @@
+import { CommonEventFunction } from "@tarojs/components";
 import { CSSProperties, PropsWithChildren } from "react";
 
 export interface AnyOpt {
@@ -58,4 +59,5 @@ export interface Props extends PropsWithChildren<any> {
     y?: number | string | boolean;
   };
   isLastRowSticky?: boolean; // 是否最后一行粘性固定在底部，用于编辑新增
+  onScrollToLower?: CommonEventFunction; // 滚动到底部触发
 }

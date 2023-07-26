@@ -40,6 +40,7 @@ const Table = (props: Props): JSX.Element | null => {
     multipleSort = false,
     scroll = {},
     isLastRowSticky = false,
+    onScrollToLower,
   } = props;
 
   const [dataSource, setDataSource] = useState<AnyOpt[]>(pDataSource);
@@ -107,6 +108,7 @@ const Table = (props: Props): JSX.Element | null => {
         className="taro3table_table"
         scroll-x={dataSource.length !== 0 && scroll.x}
         scroll-y={scroll.y}
+        onScrollToLower={onScrollToLower}
         style={{
           maxWidth: getSize(scroll.x as number | string),
           maxHeight: getSize(scroll.y as number | string),
