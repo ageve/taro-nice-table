@@ -12,7 +12,7 @@ import { Row } from "./Row";
 import { Title } from "./Title";
 import { Loading } from "./Loading";
 import { Empty } from "./Empty";
-import { doSort, getSize, calculateFixedDistance } from "./utils";
+import { getSize, calculateFixedDistance } from "./utils";
 
 // constants
 export const DEFAULT_COL_WIDTH = 100; // 默认列宽
@@ -25,7 +25,7 @@ export const JC_TA_MAP = {
 const Table = (props: Props): JSX.Element | null => {
   const {
     columns: pColumns = [],
-    dataSource: pDataSource = [],
+    dataSource = [],
     rowKey = "",
     loading = false,
     className = "",
@@ -43,7 +43,7 @@ const Table = (props: Props): JSX.Element | null => {
     onScrollToLower,
   } = props;
 
-  const [dataSource, setDataSource] = useState<AnyOpt[]>(pDataSource);
+  // const [dataSource, setDataSource] = useState<AnyOpt[]>(pDataSource);
   const [columns, setColumns] = useState<IColumns[]>(pColumns);
   const [expansion, setExpansion] = useState<boolean>(false); // 是否展开
 
@@ -55,11 +55,11 @@ const Table = (props: Props): JSX.Element | null => {
     setColumns(pColumns);
   }, [pColumns]);
 
-  // 排序
-  useEffect(() => {
-    const result = doSort({ columns, dataSource: pDataSource });
-    // setDataSource(result);
-  }, [columns, pColumns, pDataSource]);
+  // // 排序
+  // useEffect(() => {
+  //   const result = doSort({ columns, dataSource: pDataSource });
+  //   // setDataSource(result);
+  // }, [columns, pColumns, pDataSource]);
 
   // 表头点击事件
   const handleClickTitle = useCallback(
