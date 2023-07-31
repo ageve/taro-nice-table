@@ -58,7 +58,7 @@ const Table = (props: Props): JSX.Element | null => {
   // 排序
   useEffect(() => {
     const result = doSort({ columns, dataSource: pDataSource });
-    setDataSource(result);
+    // setDataSource(result);
   }, [columns, pColumns, pDataSource]);
 
   // 表头点击事件
