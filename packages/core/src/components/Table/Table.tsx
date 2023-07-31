@@ -95,6 +95,16 @@ const Table = (props: Props): JSX.Element | null => {
     }, 0);
   }, [columns]);
 
+  const rowStyled = useCallback(
+    (record: AnyOpt, index: number) => {
+      if (typeof rowStyle === "function") {
+        return rowStyle(record, index);
+      }
+      return rowStyle;
+    },
+    [rowStyle]
+  );
+
   return (
     <View
       className={cn(["taro3table", className])}
@@ -153,7 +163,7 @@ const Table = (props: Props): JSX.Element | null => {
                         ? "taro3table_row_last_sticky"
                         : ""
                     }`}
-                    rowStyle={rowStyle}
+                    rowStyle={rowStyled(dataSourceItem, index)}
                     columns={columns}
                     expansion={expansion}
                     setExpansion={setExpansion}

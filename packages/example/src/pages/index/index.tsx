@@ -192,7 +192,20 @@ export default () => {
             dataSource={dataSource}
             rowKey="user_id"
             loading={loading}
-            isLastRowSticky
+            rowStyle={(_, index) => {
+              if (index === 0) {
+                return {
+                  position: "sticky",
+                  top: "48rpx",
+                  borderBottom: "1px solid #e5e5e5",
+                  zIndex: 93,
+                };
+              }
+              if (index === 1) {
+                return { borderTop: "none" };
+              }
+              return {};
+            }}
             style={{
               margin: "0 auto",
               width: "100vw",

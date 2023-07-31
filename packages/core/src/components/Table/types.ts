@@ -45,7 +45,7 @@ export interface Props extends PropsWithChildren<any> {
   style?: CSSProperties; // 最外层包裹节点内联样式
   colStyle?: CSSProperties; // 单元格统一样式
   colClassName?: string; // 单元格统一类名
-  rowStyle?: CSSProperties; // 行统一样式
+  rowStyle?: CSSProperties | ((record: AnyOpt, index: number) => CSSProperties); // 行统一样式
   rowClassName?: string; // 表格行 css 类名
   titleStyle?: CSSProperties; // 统一设置表头样式
   titleClassName?: string; // 统一设置表头单元格 css 类名
