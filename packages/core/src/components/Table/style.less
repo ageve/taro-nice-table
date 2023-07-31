@@ -156,10 +156,6 @@
         background-color: #ffffff;
         border-top: 1px solid #e5e5e5;
 
-        &:last-child {
-          border-top: none;
-        }
-
         > .taro3table_col {
           min-height: @min-height;
           background-color: #ffffff;
@@ -205,6 +201,9 @@
         position: sticky;
         bottom: -1px;
         z-index: 93;
+        &:last-child {
+          border-top: none;
+        }
       }
     }
   }
