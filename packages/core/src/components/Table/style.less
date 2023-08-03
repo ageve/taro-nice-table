@@ -1,4 +1,4 @@
-@head_height: unit(48, rpx);
+@head_height: unit(48, Px);
 
 @keyframes rotate {
   from {
@@ -13,33 +13,33 @@
   box-sizing: border-box;
   position: relative;
   max-width: 100vw;
-  // border-radius: unit(8, rpx);
-  border: unit(1, rpx) solid #e5e5e5;
+  // border-radius: unit(8, px);
+  border: unit(1, px) solid #e5e5e5;
 
   .taro3table_loading {
     position: absolute;
-    height: calc(100% + unit(4, rpx));
-    width: calc(100% + unit(4, rpx));
+    height: calc(100% + unit(4, px));
+    width: calc(100% + unit(4, px));
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     background-color: transparent;
-    backdrop-filter: blur(unit(6, rpx));
+    backdrop-filter: blur(unit(6, px));
     z-index: 94;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: unit(28, rpx);
+    font-size: unit(28, px);
 
     > .taro3table_circle {
-      height: unit(30, rpx);
-      width: unit(30, rpx);
-      border-top: unit(2, rpx) solid rgba(153, 153, 153, 0.7);
-      border-right: unit(2, rpx) solid rgba(153, 153, 153, 0.7);
-      border-bottom: unit(2, rpx) solid rgba(153, 153, 153, 0.7);
-      border-left: unit(2, rpx) solid transparent;
+      height: unit(30, px);
+      width: unit(30, px);
+      border-top: unit(2, px) solid rgba(153, 153, 153, 0.7);
+      border-right: unit(2, px) solid rgba(153, 153, 153, 0.7);
+      border-bottom: unit(2, px) solid rgba(153, 153, 153, 0.7);
+      border-left: unit(2, px) solid transparent;
       border-radius: 50%;
       animation: rotate 1s linear infinite;
     }
@@ -52,10 +52,10 @@
     .taro3table_empty {
       width: 100%;
       text-align: center;
-      font-size: unit(24, rpx);
+      font-size: unit(24, px);
       color: #cccccc;
-      min-height: unit(88, rpx);
-      line-height: unit(88, rpx);
+      min-height: unit(88, px);
+      line-height: unit(88, px);
     }
 
     .taro3table_head {
@@ -80,7 +80,7 @@
         justify-content: center;
         height: @head_height;
         color: #ba5429;
-        font-size: unit(28, px);
+        font-size: unit(17, Px);
         font-family: PingFangSC-Regular, PingFang SC, sans-serif;
         font-weight: 400;
         background-color: #f7f7f7;
@@ -104,7 +104,7 @@
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          margin-left: unit(10, rpx);
+          margin-left: unit(10, px);
 
           > .taro3table_btn {
             @color: #e2e2e2;
@@ -118,7 +118,7 @@
               border-left: @size solid transparent;
               border-right: @size solid transparent;
               border-bottom: @size solid @color;
-              margin-bottom: unit(4, rpx);
+              margin-bottom: unit(4, px);
 
               &.taro3table_active {
                 border-bottom-color: @active-color;
@@ -141,7 +141,7 @@
     }
 
     .taro3table_body {
-      @min-height: unit(60, rpx);
+      @min-height: unit(30, Px);
       min-height: @min-height;
 
       > .taro3table_row {
@@ -167,14 +167,14 @@
             border-right: none;
           }
           text {
-            font-size: unit(28, px);
+            font-size: unit(16, Px);
             font-family: PingFangSC-Regular, PingFang SC, sans-serif;
             font-weight: 400;
             color: #222222;
             // 收起
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            // white-space: nowrap;
           }
 
           // 展开

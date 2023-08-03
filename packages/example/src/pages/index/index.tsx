@@ -176,14 +176,14 @@ export default () => {
           setTableHeight(res[0].height);
         });
     });
-  }, []);
+  }, [dataSource]);
 
   return (
     <View
       className="example"
       style={{ height: "100vh", display: "flex", flexDirection: "column" }}
     >
-      <View style={{ height: "200px", flexShrink: 0 }}></View>
+      <View style={{ height: "200Px", flexShrink: 0 }}></View>
       <View style={{ flexGrow: 1, height: 10 }} id="table-box">
         {tableHeight && (
           <Table
@@ -196,7 +196,7 @@ export default () => {
               if (index === 0) {
                 return {
                   position: "sticky",
-                  top: "48rpx",
+                  top: "48px",
                   borderBottom: "1px solid #e5e5e5",
                   zIndex: 93,
                 };
